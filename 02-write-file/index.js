@@ -38,3 +38,7 @@ promptUser();
 rl.on('close', function () {
   process.exit(0); // Exit the Node.js process
 });
+rl.on('SIGINT', () => {
+  console.log('Exiting...');
+  process.exit(0);
+});
