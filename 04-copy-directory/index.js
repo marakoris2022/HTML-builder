@@ -4,6 +4,27 @@ const path = require('path');
 const filePath = __dirname + '/files';
 const copyFilePath = __dirname + '/files-copy';
 
+// Delete all files in a folder
+fs.readdir(copyFilePath, (err, files) => {
+  if (err) {
+    // console.error('Error reading folder:', err);
+    return;
+  }
+
+  files.forEach((file) => {
+    const filePath = path.join(copyFilePath, file);
+
+    // Use fs.unlink to delete files
+    fs.unlink(filePath, (err) => {
+      if (err) {
+        console.error('Error deleting file:', filePath, err);
+      } else {
+        console.log('Deleted file:', filePath);
+      }
+    });
+  });
+});
+
 // Create files-copy dir
 fs.mkdir(copyFilePath, { recursive: true }, (e, dir) => {
   if (e) console.error(e);
